@@ -112,7 +112,8 @@ get_all_candidates(Current, AllCandidates) :-
         nth1(_, Board, Row),
         nth1(_, Row, Cell),
         (var(Cell) -> 
-            findall(V, indomain(Cell), Candidates)
+            fd_dom(Cell, Dom),
+            (dom_integers(Dom, Candidates) -> true ; Candidates = [])
         ;
             Candidates = []
         )
@@ -133,18 +134,29 @@ chop_9(List, [Row|Rest]) :-
     chop_9(Tail, Rest).
 
 % --- XAI: Explain Move ---
-% Case 1: Naked Single (1 candidate)
 explain_move(Current, Row, Col, Reason) :-
-    get_all_candidates(Current, AllCands),
-    nth1(Row, AllCands, R_Cands),
-    nth1(Col, R_Cands, Cands),
-    length(Cands, 1),
-    Cands = [Val],
-    format(string(Reason), "Solo el ~d es posible aqui (Naked Single).", [Val]).
+    nth1(Row, Current, RowList), nth1(Col, RowList, Val),
+    nonvar(Val),
+    format(string(Reason), "La celda ya tiene el valor ~w.", [Val]), !.
 
-% Case 2: Fallback
-explain_move(_, _, _, Reason) :-
-    format(string(Reason), "Multiples candidatos posibles o celda llena.", []).
+explain_move(Current, Row, Col, Reason) :-
+    (get_all_candidates(Current, AllCands) ->
+        nth1(Row, AllCands, R_Cands),
+        nth1(Col, R_Cands, Cands),
+        explain_decision(Cands, Reason)
+    ;
+        format(string(Reason), "Error: Tablero inv~wlido (Conflictos detectados).", [225])
+    ).
+
+explain_decision([], Reason) :- 
+    format(string(Reason), "Bloqueado: No hay n~wmeros v~wlidos seg~wn las reglas. (Revisa tus pasos previos).", [250, 225, 250]).
+
+explain_decision([Val], Reason) :- 
+    format(string(Reason), "Solo el ~d es posible (Naked Single).", [Val]).
+
+explain_decision(List, Reason) :-
+    atomic_list_concat(List, ', ', Str),
+    format(string(Reason), "Opciones: [~w]", [Str]).
 
 % --- Verification ---
 % Errors: Count of cells in Current that match neither Empty nor Solution
@@ -175,4 +187,14 @@ get_hint(Current, Solution, HintRow, HintCol, HintVal) :-
 % --- Helpers for Java Interop ---
 var_to_zero(X, 0) :- var(X), !.
 var_to_zero(X, X).
+
+% Convert FD Domain (Range/Integer/Compound) to List
+dom_integers(D, [D]) :- integer(D), !.
+dom_integers(Min..Max, List) :- findall(N, between(Min, Max, N), List), !.
+dom_integers(D1 \/ D2, List) :- 
+    dom_integers(D1, L1), 
+    dom_integers(D2, L2), 
+    append(L1, L2, List).
+dom_integers(Empty, []) :- var(Empty), !.
+dom_integers(_, []).
 
