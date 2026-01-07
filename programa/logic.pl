@@ -106,16 +106,20 @@ get_all_candidates(Current, AllCandidates) :-
     init_board(Board),
     maplist(copy_row_vars, Current, Board),
     append(Board, Vs), Vs ins 1..9,  % CRITICAL: Define domains
-    valid_sudoku(Board),
-    
     findall(Candidates, (
-        nth1(_, Board, Row),
-        nth1(_, Row, Cell),
-        (var(Cell) -> 
-            fd_dom(Cell, Dom),
-            (dom_integers(Dom, Candidates) -> true ; Candidates = [])
+        nth1(R, Board, Row),
+        nth1(C, Row, Cell),
+        nth1(R, Current, CurRow),
+        nth1(C, CurRow, CurCell),
+        (CurCell == 0 ->  % Check RAW input for 0
+            (var(Cell) ->
+                fd_dom(Cell, Dom),
+                (dom_integers(Dom, Candidates) -> true ; Candidates = [])
+            ;
+                Candidates = [Cell] % Auto-solved by constraints
+            )
         ;
-            Candidates = []
+            Candidates = [] % Already filled by user
         )
     ), FlatCandidates),
     chop_9(FlatCandidates, AllCandidates).
@@ -137,7 +141,7 @@ chop_9(List, [Row|Rest]) :-
 explain_move(Current, Row, Col, Reason) :-
     nth1(Row, Current, RowList), nth1(Col, RowList, Val),
     nonvar(Val),
-    format(string(Reason), "La celda ya tiene el valor ~w.", [Val]), !.
+    format(string(Reason), "La celda ya tiene un valor fijo (~w).", [Val]), !.
 
 explain_move(Current, Row, Col, Reason) :-
     (get_all_candidates(Current, AllCands) ->
@@ -145,11 +149,11 @@ explain_move(Current, Row, Col, Reason) :-
         nth1(Col, R_Cands, Cands),
         explain_decision(Cands, Reason)
     ;
-        format(string(Reason), "Error: Tablero inv~wlido (Conflictos detectados).", [225])
+        format(string(Reason), "Error: Tablero inv~clido (Conflictos detectados).", [225])
     ).
 
 explain_decision([], Reason) :- 
-    format(string(Reason), "Bloqueado: No hay n~wmeros v~wlidos seg~wn las reglas. (Revisa tus pasos previos).", [250, 225, 250]).
+    format(string(Reason), "Bloqueado: No hay n~cmeros v~clidos seg~cn las reglas. (Revisa tus pasos previos).", [250, 225, 250]).
 
 explain_decision([Val], Reason) :- 
     format(string(Reason), "Solo el ~d es posible (Naked Single).", [Val]).
