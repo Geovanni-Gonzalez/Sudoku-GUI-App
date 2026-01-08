@@ -1,32 +1,56 @@
 {
-    "project": "Sudoku AI Deluxe",
-    "tech": [
-        "Java (Swing/AWT)",
-        "Prolog (CLP(FD) / SWI-Prolog)",
-        "Process Inteoperability"
-    ],
-    "features": [
-        "Hybrid Engine: Java GUI + Prolog Logic Brain",
-        "XAI (Explainable AI): 'Why?' Explanation for moves",
-        "Smart Pencil Marks: Real-time candidate visualization",
-        "Matrix Mode: Cyberpunk/Hacker visual theme toggle",
-        "Difficulty Levels: Easy, Medium, Hard (Logic-based generation)",
-        "Persistence: Save/Load game state with Timer tracking",
-        "Classic Features: Hints, Validation, Auto-Solve"
-    ],
-    "stack": {
-        "language": "Java 17+ / SWI-Prolog 9+",
-        "framework": "Native Swing + CLP(FD)",
-        "tools": [
-            "Javac",
-            "SWI-Prolog CLI",
-            "Git"
+    "en": {
+        "tech": [
+            "Java (Swing)",
+            "Prolog (CLP(FD))",
+            "XAI (Explainable AI)",
+            "Inter-process Communication"
         ],
-        "database": "File-based Persistence (.dat)"
+        "features": [
+            "Hybrid Engine: Java UI + Prolog logic brain",
+            "Explainable AI (XAI) for step-by-step move reasoning",
+            "Smart Pencil Marks with real-time candidate visualization",
+            "Premium Matrix-style Cyberpunk visual theme",
+            "Logic-based generation for multiple difficulty levels"
+        ],
+        "stack": {
+            "language": "Java / Prolog",
+            "framework": "Native Swing / CLP(FD)",
+            "tools": [
+                "JDK 17",
+                "SWI-Prolog Engine",
+                "ProcessBuilder"
+            ],
+            "database": "State Serialization (.dat)"
+        },
+        "screenshots": [],
+        "description": "A masterclass in hybrid software engineering, this Sudoku system delegates its intelligence to an expert Prolog brain using Constraint Logic Programming. While the Java-based Swing GUI provides a premium Cyberpunk-inspired experience, the underlying Prolog agent provides unique 'Explainable AI' (XAI) transparency, allowing users to ask 'Why?' and receive a logical breakdown of any recommendation. It combines advanced candidate tracking, real-time board validation, and high-performance inter-process communication for a smooth, intelligent puzzle experience."
     },
-    "screenshots": [],
-    "description": {
-        "es": "Sistema avanzado de Sudoku que combina una interfaz moderna en Java con la potencia lógica de Prolog. Incluye características innovadoras como explicaciones inteligentes (XAI), visualización de candidatos en tiempo real (Pencil Marks), temas visuales dinámicos (Modo Matrix) y gestión de partidas.",
-        "en": "Advanced Sudoku System combining a modern Java GUI with Prolog's logical power. Features innovative capabilities like Explainable AI (XAI), real-time candidate visualization (Pencil Marks), dynamic visual themes (Matrix Mode), and game state persistence."
+    "es": {
+        "tech": [
+            "Java (Swing)",
+            "Prolog (CLP(FD))",
+            "XAI (IA Explicable)",
+            "Comunicación entre Procesos"
+        ],
+        "features": [
+            "Motor Híbrido: Interfaz Java + Cerebro lógico en Prolog",
+            "IA Explicable (XAI) para razonamiento paso a paso de movimientos",
+            "Marcas de lápiz inteligentes con visualización de candidatos en tiempo real",
+            "Tema visual Cyberpunk estilo Matrix Premium",
+            "Generación basada en lógica para múltiples niveles de dificultad"
+        ],
+        "stack": {
+            "language": "Java / Prolog",
+            "framework": "Swing Nativo / CLP(FD)",
+            "tools": [
+                "JDK 17",
+                "Motor SWI-Prolog",
+                "ProcessBuilder"
+            ],
+            "database": "Serialización de Estado (.dat)"
+        },
+        "screenshots": [],
+        "description": "Una clase magistral de ingeniería de software híbrida, este sistema de Sudoku delega su inteligencia a un cerebro experto en Prolog utilizando Programación Lógica con Restricciones. Mientras que la interfaz Swing en Java ofrece una experiencia premium inspirada en el Cyberpunk, el agente de Prolog subyacente proporciona transparencia mediante 'IA Explicable' (XAI), permitiendo a los usuarios entender el razonamiento lógico tras cada jugada. Combina rastreo de candidatos y validación en tiempo real."
     }
 }
