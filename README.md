@@ -1,5 +1,7 @@
 ﻿# Sudoku GUI App
 
+[![CI](https://github.com/Geovanni-Gonzalez/Sudoku-GUI-App/actions/workflows/ci.yml/badge.svg)](https://github.com/Geovanni-Gonzalez/Sudoku-GUI-App/actions/workflows/ci.yml)
+
 ## Descripción
 Aplicación gráfica de Sudoku en Java con integración Prolog para lógica de resolución o validación y guardado local.
 
