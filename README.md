@@ -1,4 +1,6 @@
-﻿# Sudoku GUI App
+# Sudoku GUI App
+
+> **Bloque Prolog del portafolio (2 de 2).** La lógica de validación/resolución vive en Prolog (`programa/logic.pl`) invocada desde Java Swing vía subproceso `swipl` (`PrologBridge.java`). El otro mecanismo de integración — microservicio HTTP/JSON en SWI-Prolog — está en [Aventura-del-Tesoro-Perdido](https://github.com/Geovanni-Gonzalez/Aventura-del-Tesoro-Perdido).
 
 [![CI](https://github.com/Geovanni-Gonzalez/Sudoku-GUI-App/actions/workflows/ci.yml/badge.svg)](https://github.com/Geovanni-Gonzalez/Sudoku-GUI-App/actions/workflows/ci.yml)
 
